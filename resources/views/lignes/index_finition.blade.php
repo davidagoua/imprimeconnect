@@ -51,7 +51,7 @@
                                 <a title="Terminer" class="btn btn-sm btn-success" href="{{ route('lignes.terminer', ['ligne'=>$ligne]) }}">
                                     <span class="fa fa-check"></span>
                                 </a>
-                                @elseif($ligne->status === 'finition')
+                                @elseif($ligne->status === 'design')
                                     <span class="badge bg-secondary">En cours</span>
                                 @else
                                     <span class="badge bg-success">Traitée</span>
