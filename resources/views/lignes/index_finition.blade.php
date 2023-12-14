@@ -38,7 +38,7 @@
                             <td>{{ $ligne->commande->format }}</td>
 
                             <td>
-                                @if($ligne->status !== 'finition')
+                                @if($ligne->status === 'finition')
                                 <a title="télécharger" class="btn btn-sm btn-info" href="{{ route('download', ['file'=>$ligne->file]) }}">
                                     <span class="fa fa-download"></span>
                                 </a>
