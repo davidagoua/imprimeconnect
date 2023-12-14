@@ -12,7 +12,9 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Tableau de bord</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{{ route('home') }}">Général</a></li>
+                    @hasrole('admin|reception')
                     <li><a class="nav-link" href="index.html">Comptabilité</a></li>
+                    @endhasrole
                 </ul>
             </li>
             @hasrole('admin|reception')
