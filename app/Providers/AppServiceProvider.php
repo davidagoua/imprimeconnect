@@ -22,9 +22,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        /*
         $commandes_design = Ligne::query()->whereStatus('design')->count();
         $commandes_finition = Ligne::query()->whereStatus('finition')->count();
         View::share('commandes_design', $commandes_design);
         View::share('commandes_finition', $commandes_finition);
+        */
     }
 }

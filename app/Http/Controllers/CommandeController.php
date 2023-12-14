@@ -115,7 +115,7 @@ class CommandeController extends Controller
 
     public function pdf(Request $request, Commande $commande)
     {
-        
+
         $pdf = Pdf::loadView('pdfs.commande', [
             'commande'=>$commande
         ]);
