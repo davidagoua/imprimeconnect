@@ -17,13 +17,13 @@ class DashboardController extends Controller
                 return $this->admin_dashboard($request);
                 break;
             case auth()->user()->hasRole('designer'):
-                return $this->admin_dashboard($request);
+                return $this->designer_dashboard($request);
                 break;
             case auth()->user()->hasRole('finition'):
-                return $this->admin_dashboard($request);
+                return $this->finition_dashboard($request);
                 break;
             case auth()->user()->hasRole('conseiller'):
-                return $this->admin_dashboard($request);
+                return $this->conseiller_dashboard($request);
                 break;
             default:
                 return abort(401);
@@ -50,12 +50,12 @@ class DashboardController extends Controller
 
     public function designer_dashboard(Request $request)
     {
-
+        return redirect()->route('commandes.design');
     }
 
     public function finition_dashboard(Request $request)
     {
-
+        return redirect()->route('commandes.finition');
     }
 
     public function conseiller_dashboard(Request $request)

@@ -1,7 +1,7 @@
 <div class="main-sidebar bg-dark sidebar-style-2" >
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="index.html" class=" text-white">{{ config('APP_NAME', 'ImprimeConnect') }}</a>
+            <a href="index.html" class=" text-white"><img src="/images/logo.jpg" height="30" width="80" alt=""></a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm bg-dark text-white">
             <a href="index.html" class="text-white">IC</a>
