@@ -29,7 +29,7 @@
                         </div>
                         <hr class="col-12">
                         <div class="mb-3 col-md-4 col-12">
-                            <label for="">Delaie de livraison</label>
+                            <label for="">Delai de livraison</label>
                             <input required type="date" value="{{ $commande->deadline ?? '' }}" class="form-control" name="deadline">
                             @error('deadline')
                             <small class="text-danger">{{ $message }}</small>
@@ -111,7 +111,7 @@
         let proto = $('div').innerHTML = `
                 <div class="row mb-3 for-repeater" id="entry_${i}">
                     <input type="hidden" name="exists[]" value="${ data.id !== undefined ? data.id : 0}">
-                    <div class="col-12 col-md-1">
+                    <div class="col-12 col-md-2">
                         <label for="">Quantité</label>
                         <input value="${data.quantite ?? 1}" class="form-control" type="number" required name="quantites[]">
 
@@ -128,16 +128,18 @@
                         <label for="">Fichier</label>
                         <input class="form-control"  type="file" required name="fichier-${i}">
                     </div>
-                    <div class="col-12 col-md-1">
-                        <label for="">Nombre</label>
-                        <input value="${data.nombre ?? 1}" class="form-control" type="number" required name="nombres[]">
-                    </div>
+
                     <div class="col-12 col-md-2">
                         <label for="">Prix Unitaire</label>
                         <a href="#" onclick="event.preventDefault(); removeEntry(${i})" class="float-right text-danger"><i class="fa fa-times"></i></a>
                         <input value="${data.pu ?? 0}" class="form-control" type="text" required name="pus[]">
                     </div>
+                    <div class="col-12 mb-2">
+                        <label for="">Nb</label>
+                        <textarea name="nbs[]" class="form-control" rows="3"></textarea>
+                    </div>
                 </div>
+                <hr/>
             `
         parent.append(proto)
     }

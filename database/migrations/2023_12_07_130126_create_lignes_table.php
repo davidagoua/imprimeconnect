@@ -21,9 +21,10 @@ return new class extends Migration
             $table->string('status')->default('reception');
             $table->string('dimension')->nullable();
             $table->string('nom_fichier')->nullable();
-            $table->integer('nombre')->nullable();
+            $table->longText('nb')->nullable();
             $table->integer('pu')->nullable();
             $table->string('file');
+            $table->json('data')->nullable();
         });
     }
 

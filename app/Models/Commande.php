@@ -34,7 +34,7 @@ class Commande extends Model
 
     public function getMontantAttribute(): int
     {
-        return $this->lignes()->sum(new Expression('nombre * pu'));
+        return $this->lignes()->sum(new Expression('quantite * pu'));
     }
 
     public function getPkAttribute(): string
@@ -53,6 +53,14 @@ class Commande extends Model
         parent::addGlobalScope('actif', function(Builder $query){
             return $query->whereNull('deleted_at');
         });
+    }
+
+    public function getPercentAttribute()
+    {
+        return $this->lignes()->count() != 0 ?
+            $this->lignes()->whereStatus('termine')->count() / $this->lignes()->count() *100 :
+            0
+            ;
     }
 
 

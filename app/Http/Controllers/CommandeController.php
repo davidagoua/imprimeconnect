@@ -60,7 +60,7 @@ class CommandeController extends Controller
             'quantites'=>'array',
             'designations'=>'array',
             'dimensions'=>'array',
-            'nombres'=>'array',
+            'nbs'=>'array',
             'pus'=>'array',
             'exists'=>'array'
         ]);
@@ -83,7 +83,7 @@ class CommandeController extends Controller
                     'quantite'=>$data['quantites'][$i],
                     'dimension'=>$data['dimensions'][$i],
                     'pu'=>$data['pus'][$i],
-                    'nombre'=>$data['nombres'][$i],
+                    'nb'=>$data['nbs'][$i],
                     'file'=>$filepath,
                     'commande_id'=>$commande->id,
                     'status'=>'design'
@@ -95,7 +95,7 @@ class CommandeController extends Controller
                     'quantite'=>$data['quantites'][$i],
                     'dimension'=>$data['dimensions'][$i],
                     'pu'=>$data['pus'][$i],
-                    'nombre'=>$data['nombres'][$i],
+                    'nb'=>$data['nbs'][$i],
                     'file'=>$filepath,
                     'commande_id'=>$commande->id
                 ]);

@@ -26,7 +26,7 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->contact }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>{{ collect($user->roles)->join(',') }}</td>
+                        <td>{{ $user->roles()->first()->name }}</td>
                         <td>
                             <a class="btn btn-sm btn-secondary" href="{{ route('users.edit', ['user'=>$user]) }}">
                                 <span class="fa fa-edit"></span>

@@ -33,7 +33,11 @@
                             <td>{{ $commande->montant }}</td>
                             <td>{{ $commande->infographiste?->name ?? 'nom defini' }}</td>
                             <td>{{ $commande->lignes->count()  }}</td>
-                            <td><span class="badge badge-info">{{ $commande->status  }}</span></td>
+                            <td>
+                                <div class="progress mb-3">
+                                    <div class="progress-bar" role="progressbar" data-width="{{ $commande->percent  }}%" aria-valuenow="{{ $commande->percent  }}" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+                                </div>
+                            </td>
                             @hasrole('admin')
                             @endhasrole
                             <td>

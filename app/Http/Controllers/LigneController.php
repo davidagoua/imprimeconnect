@@ -13,11 +13,11 @@ class LigneController extends Controller
     {
         if(! auth()->user()->hasRole('admin')){
             $lignes = Ligne::query()
-                ->whereStatus('design')
+                //->whereStatus('design')
                 ->whereRelation('commande','infographiste_id', auth()->id())->get();
         }   else{
             $lignes = Ligne::query()
-                ->whereStatus('design')
+                //->whereStatus('design')
                 ->get();
         }
         return view('lignes.index_design', [
@@ -49,10 +49,11 @@ class LigneController extends Controller
     {
         if(! auth()->user()->hasRole('admin')){
             $lignes = Ligne::query()
-                ->whereStatus('finition')->get();
+                //->whereStatus('finition')
+                ->get();
         }   else{
             $lignes = Ligne::withoutGlobalScope('actif')
-                ->whereStatus('finition')
+                //->whereStatus('finition')
                 ->get();
         }
         return view('lignes.index_finition', [
@@ -62,7 +63,7 @@ class LigneController extends Controller
 
     public function delete(Ligne $ligne)
     {
-        $ligne->update('deleted_at',now());
+        $ligne->update(['deleted_at'=>now()]);
         return back()->with('success', 'Fichier supprimée');
     }
 

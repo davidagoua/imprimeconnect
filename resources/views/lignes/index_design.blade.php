@@ -17,7 +17,7 @@
                         <th>DESIGNATION</th>
                         <th>CLIENT</th>
                         <th>DIMENSION</th>
-                        <th>TYPE</th>
+                        <th>FICHIER</th>
                         <th>FORMAT</th>
 
                         <th>ACTIONS</th>
@@ -30,10 +30,14 @@
                             </td>
                             <td>{{ $ligne->commande->client_nom }}</td>
                             <td>{{ $ligne->dimension }}</td>
-                            <td><span class="badge badge-secondary">{{ '.'.str($ligne->file)->split('/[\s.]+/')->last() }}</span></td>
-                            <td>{{ $ligne->commande->format }}</td>
-
                             <td>
+                                <a href="{{ route('download', ['file'=>$ligne->file]) }}">
+                                    <span class="badge badge-secondary">{{ $ligne->designation }}{{ '.'.str($ligne->file)->split('/[\s.]+/')->last() }}</span>
+                                </a>
+                            </td>
+                            <td>{{ $ligne->commande->format }}</td>
+                            <td>
+                            @if($ligne->status === 'design')
                                 <a class="btn btn-sm btn-info" href="{{ route('download', ['file'=>$ligne->file]) }}">
                                     <span class="fa fa-download"></span>
                                 </a>
@@ -45,6 +49,9 @@
                                     <span class="">Upload</span>
                                 </a>
 
+                            @else
+                                <span class="badge bg-secondary">Traitée</span>
+                            @endif
                             </td>
 
                         </tr>
