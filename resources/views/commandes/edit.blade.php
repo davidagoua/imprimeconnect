@@ -45,7 +45,7 @@
                         <div class="mb-3 col-md-4 col-12">
                             <label for="">Format</label>
                             <select name="format"  id="" class="form-control">
-                                @foreach(['gd'=>'Grand Format', 'pt'=>'Petit Format','gdt'=>'Trés Grand Format'] as $format => $label)
+                                @foreach(['Grand Format'=>'Grand Format', 'Petit Format'=>'Petit Format','Autre'=>'Autres','Gadget'=>'Gadget'] as $format => $label)
                                 <option value="{{ $format }}" @selected($commande->format === $format)>{{ $label }}</option>
                                 @endforeach
                             </select>
@@ -64,6 +64,14 @@
                             <select name="infographiste_id"  id="" class="form-control">
                                 @foreach($designers as $designer)
                                     <option @if($commande->infographiste_id == $designer->id) selected @endif value="{{ $designer->id }}">{{ ucfirst($designer->name) }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3 col-md-4 col-12">
+                            <label for="">Mode de paiement</label>
+                            <select name="mode_paiement"  id="" class="form-control">
+                                @foreach(['Espèce','OM','Momo','Wave','Chèque'] as $format)
+                                    <option value="{{ $format }}" @selected($commande->format === $format)>{{ $format }}</option>
                                 @endforeach
                             </select>
                         </div>

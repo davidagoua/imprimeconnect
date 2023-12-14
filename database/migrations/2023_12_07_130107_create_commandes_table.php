@@ -17,6 +17,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('client_nom');
             $table->string('contact');
+            $table->string('mode_paiement')->nullable();
             $table->date('deadline')->nullable();
             $table->string('lieu_livraison')->nullable();
             $table->string('format')->nullable();
