@@ -28,6 +28,7 @@
                     @foreach($commandes as $commande)
                         <tr class="@if($commande->deleted_at) text-danger @endif">
                             <td>#{{ $commande->pk }}</td>
+                            <td>{{ Date::create($commande->created_at)->format('d/M/Y') }}</td>
                             <td>{{ $commande->client_nom }}</td>
                             <td>{{ $commande->contact }}</td>
                             <td>{{ $commande->montant }}</td>
