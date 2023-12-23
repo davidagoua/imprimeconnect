@@ -27,7 +27,6 @@ class CommandeController extends Controller
 
     public function create(Request $request)
     {
-        activity()->causedBy(auth()->user())->log();
         return $this->edit($request, new Commande());
     }
 
