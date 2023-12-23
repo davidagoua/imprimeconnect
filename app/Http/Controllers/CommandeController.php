@@ -105,7 +105,7 @@ class CommandeController extends Controller
         activity()->causedBy(auth()->user())
             ->performedOn($commande)
             ->log('Enregistré une commande');
-        User::all()->each(fn($user)=> $user->notify(new CommandeCreated($commande)));
+        auth()->user()->notify(new CommandeCreated($commande));
 
         return redirect()->route('commandes.index')->with('success', 'Commande enrégistrée');
     }

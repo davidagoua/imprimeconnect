@@ -148,20 +148,24 @@
     </div>
 </div>
 @livewireScripts
-{{--
+
 <script src="https://js.pusher.com/8.0.1/pusher.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     var pusher = new Pusher("abcac9dd524eef266863", {
         cluster: "eu",
     });
 
-    var channel = pusher.subscribe("private-App.User");
+    var channel = pusher.subscribe("App.User");
     channel.bind("commande.created", (data) => {
-        console.log(data)
-        alert(data)
+        Swal.fire({
+            title: "Commande",
+            text: "Nouvelle commande !",
+            icon: "info"
+        });
     });
 </script>
---}}
+
 <!-- General JS Scripts -->
 <script src="/assets/modules/jquery.min.js"></script>
 <script src="/assets/modules/popper.js"></script>

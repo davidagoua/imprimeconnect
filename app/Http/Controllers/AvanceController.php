@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Commanded;
 use App\Models\Avance;
 use App\Models\Commande;
 use Illuminate\Http\Request;
@@ -37,6 +38,8 @@ class AvanceController extends Controller
         ]);
         $avance = new Avance(['montant'=>$data['montant'], 'user_id'=> auth()->id(), 'commande_id'=>$commande->id]);
         $avance->save();
+
+        Commanded::dispatch($commande);
 
         activity()
             ->performedOn($commande)

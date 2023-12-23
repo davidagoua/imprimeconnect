@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Events\Commanded;
 use App\Models\Commande;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Bus\Queueable;
@@ -84,5 +85,10 @@ class CommandeCreated extends Notification implements ShouldBroadcast
     public function broadcastAs(): string
     {
         return 'commande.created';
+    }
+
+    public function handle(Commanded $commanded)
+    {
+        $this->commande = $commanded->commande;
     }
 }

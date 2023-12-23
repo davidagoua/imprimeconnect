@@ -53,14 +53,17 @@
                                 <a class="btn btn-sm btn-info" href="{{ route('commandes.pdf', ['commande'=>$commande]) }}">
                                     <span class="fa fa-download"></span>
                                 </a>
-                                <a class="btn btn-sm btn-success" data-toggle="collapse" href="#avance-modal-{{$commande->id}}">
-                                    <span class="fa fa-usd"></span>
+                                <a class="btn btn-sm btn-success" title="Ajouter une avance" onclick="document.querySelector('#avance-modal-{{$commande->id}}').show()" data-toggle="collapse" href="">
+                                    <span class="fa fa-money-check"></span>
                                 </a>
                             </td>
                         </tr>
-                        <div class="collapse" id="avance-modal-{{$commande->id}}">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
+                        <dialog id="avance-modal-{{$commande->id}}" class="shadow border-none">
+                            <div class="">
+                                <button class="float-right btn-link" onclick="document.querySelector('#avance-modal-{{$commande->id}}').close()">
+                                    <span class="fa fa-times" ></span>
+                                </button>
+                                <div class="">
                                     <div class="modal-header font-weight-bold">Ajouter une avance</div>
                                     <div class="modal-body">
                                         <form action="{{ route('avance.store', ['commande'=>$commande]) }}" method="post">
@@ -76,7 +79,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </dialog>
                     @endforeach
                 </table>
             </div>
