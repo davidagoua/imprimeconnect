@@ -17,4 +17,5 @@ class Avance extends Model
     {
         return $this->belongsTo(Commande::class);
     }
+
 }
