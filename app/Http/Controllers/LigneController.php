@@ -14,6 +14,8 @@ class LigneController extends Controller
         if(! auth()->user()->hasRole('admin')){
             $lignes = Ligne::query()
                 //->whereStatus('design')
+                ->where('status', 'design')
+                ->orWhereDate('created_at', now())
                 ->whereRelation('commande','infographiste_id', auth()->id())->get();
         }   else{
             $lignes = Ligne::query()

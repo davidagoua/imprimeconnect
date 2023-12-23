@@ -27,5 +27,26 @@ class RoleSeeder extends Seeder
            'password'=>Hash::make('password')
         ]);
         $user->assignRole('admin');
+
+        User::create([
+            'name'=>'designer',
+            'email'=>'designer@mail.com',
+            'password'=>Hash::make('password')
+        ])->assignRole('designer');
+        User::create([
+            'name'=>'reception',
+            'email'=>'reception@mail.com',
+            'password'=>Hash::make('password')
+        ])->assignRole('reception');
+        User::create([
+            'name'=>'finition',
+            'email'=>'finition@mail.com',
+            'password'=>Hash::make('password')
+        ])->assignRole('finition');
+        User::create([
+            'name'=>'conseiller',
+            'email'=>'conseiller@mail.com',
+            'password'=>Hash::make('password')
+        ])->assignRole('conseiller');
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,4 +45,7 @@ Route::middleware(['auth'])->group(function(){
    Route::get('/lignes/{ligne}/revert',[\App\Http\Controllers\LigneController::class, 'revert'])->name('lignes.revert');
    Route::get('/lignes/{ligne}/terminer',[\App\Http\Controllers\LigneController::class, 'terminer'])->name('lignes.terminer');
 
+   Route::get('/avances/{commande}/form', [\App\Http\Controllers\AvanceController::class, 'create'])->name('avance.create');
+   Route::post('/avances/{commande}', [\App\Http\Controllers\AvanceController::class, 'store'])->name('avance.store');
+   Route::get('/avances/{avance}/delete', [\App\Http\Controllers\AvanceController::class, 'delete'])->name('avance.delete');
 });

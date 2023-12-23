@@ -26,7 +26,8 @@ return new class extends Migration
             $table->string('status')->default('reception');
             $table->string('montant_lettre')->nullable();
             $table->unsignedBigInteger('avance')->default(0);
-            $table->boolean('regle')->default(false);
+            $table->integer('regle')->default(0);
+            $table->string('canal')->nullable();
         });
     }
 

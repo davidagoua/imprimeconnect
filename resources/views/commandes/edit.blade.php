@@ -22,7 +22,7 @@
                         </div>
                         <div class="mb-3 col-md-4 col-12">
                             <label for="">Contact</label>
-                            <input required type="text" value="{{ $commande->contact ?? '' }}" class="form-control" name="contact">
+                            <input pattern="[0-9.]+" required type="text" value="{{ $commande->contact ?? '' }}" class="form-control" name="contact">
                             @error('contact')
                             <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -45,20 +45,12 @@
                         <div class="mb-3 col-md-4 col-12">
                             <label for="">Format</label>
                             <select name="format"  id="" class="form-control">
-                                @foreach(['Grand Format'=>'Grand Format', 'Petit Format'=>'Petit Format','Autre'=>'Autres','Gadget'=>'Gadget'] as $format => $label)
+                                @foreach(['Grand Format'=>'Grand Format', 'Petit Format'=>'Petit Format','Autre'=>'Autres','Gadget'=>'Gadget','Textile'=>'Textile'] as $format => $label)
                                 <option value="{{ $format }}" @selected($commande->format === $format)>{{ $label }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <hr class="col-12">
-                        <div class="mb-3 col-md-4 col-12">
-                            <label for="">Conseiller</label>
-                            <select name="conseiller_id"  id="" class="form-control">
-                                @foreach($conseilles as $conseille)
-                                    <option @if($commande->conseiller_id == $conseille->id) selected @endif value="{{ $conseille->id }}">{{ ucfirst($conseille->name) }}</option>
-                                @endforeach
-                            </select>
-                        </div>
                         <div class="mb-3 col-md-4 col-12">
                             <label for="">Infographiste</label>
                             <select name="infographiste_id"  id="" class="form-control">
@@ -72,6 +64,14 @@
                             <select name="mode_paiement"  id="" class="form-control">
                                 @foreach(['Espèce','OM','Momo','Wave','Chèque'] as $format)
                                     <option value="{{ $format }}" @selected($commande->format === $format)>{{ $format }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3 col-md-4 col-12">
+                            <label for="">Canal</label>
+                            <select name="canal"  id="" class="form-control">
+                                @foreach(['Téléphone','Facebook','Whatsapp','SMS','Mail'] as $format)
+                                    <option value="{{ $format }}" @selected($commande->canal === $format)>{{ $format }}</option>
                                 @endforeach
                             </select>
                         </div>

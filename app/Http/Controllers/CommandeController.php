@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Avance;
 use App\Models\Commande;
 use App\Models\Ligne;
 use App\Models\User;
+use App\Notifications\CommandeCreated;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -25,18 +27,17 @@ class CommandeController extends Controller
 
     public function create(Request $request)
     {
+        activity()->causedBy(auth()->user())->log();
         return $this->edit($request, new Commande());
     }
 
     public function edit(Request $request, Commande $commande)
     {
-        $conseilles = User::role('conseiller')->select('name','id')->get();
         $infos = User::role('designer')->select('name','id')->get();
 
         return view('commandes.edit', [
            'commande'=>$commande,
             'page_title'=> $commande->exists ? 'Modifier une commande' : 'Ajouter une commande',
-            'conseilles' => $conseilles,
             'designers' => $infos,
         ]);
     }
@@ -55,7 +56,6 @@ class CommandeController extends Controller
             'deadline'=>'required|date',
             'lieu_livraison'=>'required',
             'format'=>'required',
-            'conseiller_id'=>'numeric',
             'infographiste_id'=>'numeric',
             'quantites'=>'array',
             'designations'=>'array',
@@ -71,9 +71,11 @@ class CommandeController extends Controller
 
         $data = $validation->validated();
         $commande->status = 'design';
+        $commande->conseiller_id = auth()->id();
         $commande->fill($data)->save();
 
         $commande->refresh();
+
 
         for ($i = 0; $i < count($data['designations']); $i++) {
             $filepath = $request->file('fichier-'.$i+1)->storePublicly();
@@ -101,7 +103,10 @@ class CommandeController extends Controller
                 ]);
             }
         }
-
+        activity()->causedBy(auth()->user())
+            ->performedOn($commande)
+            ->log('Enregistré une commande');
+        User::all()->each(fn($user)=> $user->notify(new CommandeCreated($commande)));
 
         return redirect()->route('commandes.index')->with('success', 'Commande enrégistrée');
     }
@@ -109,6 +114,9 @@ class CommandeController extends Controller
     public function delete(Request $request, Commande $commande)
     {
         $commande->lignes()->delete();
+        activity()
+            ->performedOn($commande)
+            ->causedBy(auth()->user())->log('Supprimé une commande');
         $commande->update(['deleted_at'=>now()]);
         return back()->with('success', "Commande supprimée");
     }
@@ -119,6 +127,9 @@ class CommandeController extends Controller
         $pdf = Pdf::loadView('pdfs.commande', [
             'commande'=>$commande
         ]);
+        activity()
+            ->performedOn($commande)
+            ->causedBy(auth()->user())->log('Telecharger un pdf');
         return $pdf->download('commande_'.$commande->pk);
         /*
         return view('pdfs.commande', [
@@ -135,4 +146,6 @@ class CommandeController extends Controller
             'clients'=>$clients
         ]);
     }
+
+
 }

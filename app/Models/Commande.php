@@ -59,9 +59,16 @@ class Commande extends Model
     {
         return $this->lignes()->count() != 0 ?
             $this->lignes()->whereStatus('termine')->count() / $this->lignes()->count() *100 :
-            0
-            ;
+            0;
     }
 
+    public function avances(): HasMany
+    {
+        return $this->hasMany(Avance::class);
+    }
 
+    public function getCheckedOutProperty(): bool
+    {
+        return $this->avances()->sum('montant') === $this->montant;
+    }
 }
