@@ -36,7 +36,7 @@
             </li>
             @endhasrole
             @hasrole('admin|finition')
-            <li class="menu-header">Technitien</li>
+            <li class="menu-header">Technicien</li>
             <li><a class="nav-link" href="{{ route('commandes.finition') }}"><i class="fas fa-box"></i> <span>Fichiers</span>
                     <span class="badge badge-pill">{{$commandes_finition}}</span>
                 </a>

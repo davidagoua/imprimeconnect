@@ -63,7 +63,7 @@
                             @if($commande->avances()->sum('montant') == $commande->montant) text-dark font-weight-bold @endif
                         ">
                             <td>#{{ $commande->pk }}</td>
-                            <td>{{ Date::create($commande->created_at)->format('d/M/Y') }}</td>
+                            <td>{{ Date::create($commande->created_at)->format('d/M/Y H:m') }}</td>
                             <td>{{ $commande->client_nom }}</td>
                             <td>{{ $commande->contact }}</td>
                             <td>{{ $commande->avances()->sum('montant') }} /{{ $commande->montant }}</td>
