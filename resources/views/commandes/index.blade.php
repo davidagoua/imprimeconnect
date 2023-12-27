@@ -10,27 +10,32 @@
             <div class="card-body">
                 <div class="mb-2">
                     <form action="" >
-                        <div  class="row mb-2 align-items-baseline">
-                            <div class="col-12 col-md-3 ">
-                                <label for="">N° Ticket</label>
-                                <input type="text" name="id" class="form-control">
+                        <div  class="row align-items-baseline b-2 ">
+                            <div class="row col-md-10">
+                                <div class="col-12 col-md-3 ">
+                                    <input placeholder="N° Ticket" type="text" name="id" class="form-control">
+                                </div>
+                                <div class="col-12 col-md-3 ">
+                                    <input placeholder="Nom du client" type="text" name="client_nom" class="form-control">
+                                </div>
+                                <div class="col-12 col-md-3 ">
+                                    <input placeholder="Contact du client" type="text" name="contact" class="form-control">
+                                </div>
+                                <div class="col-12 col-md-3 ">
+                                    <select name=filter class="form-control" id="">
+                                        <option value="state">Terminé</option>
+                                        <option value="montant">Soldé</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="col-12 col-md-3 ">
-                                <label for="">Nom du client</label>
-                                <input type="text" name="client_nom" class="form-control">
+                            <div class="text-right col-md-2 h-full">
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="fa fa-search"></span>&nbsp;
+                                    <span>Rechercher</span>
+                                </button>
                             </div>
-                            <div class="col-12 col-md-3 ">
-                                <label for="">Contact du client</label>
-                                <input type="text" name="contact" class="form-control">
-                            </div>
+                        </div>
 
-                        </div>
-                        <div class="text-right">
-                            <button type="submit" class="btn btn-primary">
-                                <span class="fa fa-search"></span>&nbsp;
-                                <span>Rechercher</span>
-                            </button>
-                        </div>
                     </form>
                 </div>
                 <div class="d-flex justify-content-between">
@@ -71,16 +76,13 @@
                             @hasrole('admin')
                             @endhasrole
                             <td>
-                                <a class="btn btn-sm btn-secondary" href="{{ route('commandes.edit', ['commande'=>$commande]) }}">
+                                <a title="Modifier la commande" class="btn btn-sm btn-secondary" href="{{ route('commandes.edit', ['commande'=>$commande]) }}">
                                     <span class="fa fa-edit"></span>
                                 </a>
-                                <a class="btn btn-sm btn-danger" href="{{ route('commandes.delete', ['commande'=>$commande]) }}">
-                                    <span class="fa fa-trash"></span>
-                                </a>
-                                <a class="btn btn-sm btn-info" href="{{ route('commandes.pdf', ['commande'=>$commande]) }}">
+                                <a title="Telecharger le reçu" class="btn btn-sm btn-info" href="{{ route('commandes.pdf', ['commande'=>$commande]) }}">
                                     <span class="fa fa-download"></span>
                                 </a>
-                                <a class="btn btn-sm btn-success" title="Ajouter une avance" onclick="document.querySelector('#avance-modal-{{$commande->id}}').show()" data-toggle="collapse" href="">
+                                <a class="btn btn-sm btn-success" title="Avancer" onclick="document.querySelector('#avance-modal-{{$commande->id}}').show()" data-toggle="collapse" href="">
                                     <span class="fa fa-money-check"></span>
                                 </a>
                             </td>

@@ -17,10 +17,15 @@
                     @endhasrole
                 </ul>
             </li>
-            @hasrole('admin|reception')
-            <li class="menu-header">Reception</li>
+            @hasrole('admin|conseiller')
+            <li class="menu-header">Conseiller</li>
             <li><a class="nav-link" href="{{ route('commandes.index') }}"><i class="fas fa-box"></i> <span>Commandes</span></a></li>
             <li><a class="nav-link" href="{{ route('clients.index') }}"><i class="fas fa-users"></i> <span>Clients</span></a></li>
+            @endhasrole
+            @hasrole('admin|reception')
+            <li class="menu-header">Caisse</li>
+            <li><a class="nav-link" href="{{ route('commandes.index') }}"><i class="fas fa-box"></i> <span>Commandes</span></a></li>
+            <li><a class="nav-link" href="{{ route('commandes.index') }}"><i class="fas fa-calculator"></i> <span>Comptabilité</span></a></li>
             @endhasrole
             @hasrole('admin|designer')
             <li class="menu-header">Infographiste</li>
@@ -31,7 +36,7 @@
             </li>
             @endhasrole
             @hasrole('admin|finition')
-            <li class="menu-header">Finition</li>
+            <li class="menu-header">Technitien</li>
             <li><a class="nav-link" href="{{ route('commandes.finition') }}"><i class="fas fa-box"></i> <span>Fichiers</span>
                     <span class="badge badge-pill">{{$commandes_finition}}</span>
                 </a>

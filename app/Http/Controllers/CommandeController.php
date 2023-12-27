@@ -23,12 +23,11 @@ class CommandeController extends Controller
             $commandes = Commande::withoutGlobalScope('actif');
         }
 
-        $commandes->when($request->filled('id'), function(Builder $query) use($request) {
-            $id =  substr(
-                str_replace("0", "", $request->query('id')),
-                1
-            );
-            return $query->whereId($id);
+        $commandes->when($request->filled('filter'), function (Builder $query) use ($request){
+           $filter = $request->query('filter');
+           if($filter == 'state'){
+               return $query->where('status','=','');
+           }
         });
 
         $commandes->when($request->filled('client_nom'), function(Builder $query) use ($request){
