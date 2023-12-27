@@ -8,20 +8,38 @@ use App\Models\Ligne;
 use App\Models\User;
 use App\Notifications\CommandeCreated;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class CommandeController extends Controller
 {
     public function index(Request $request)
     {
         if(! auth()->user()->hasRole('admin')){
-            $commandes = Commande::query()->whereNull('deleted_at')->get();
+            $commandes = Commande::query()->whereNull('deleted_at');
         }   else{
-            $commandes = Commande::withoutGlobalScope('actif')->get();
+            $commandes = Commande::withoutGlobalScope('actif');
         }
+
+        $commandes->when($request->filled('id'), function(Builder $query) use($request) {
+            $id =  substr(
+                str_replace("0", "", $request->query('id')),
+                1
+            );
+            return $query->whereId($id);
+        });
+
+        $commandes->when($request->filled('client_nom'), function(Builder $query) use ($request){
+            return $query->where('client_nom','like', '%'.$request->query('client_nom').'%');
+        });
+        $commandes->when($request->filled('contact'), function(Builder $query) use ($request){
+            return $query->where('contact','like' ,'%'.$request->query('contact').'%');
+        });
+
         return view('commandes.index', [
-            'commandes'=> $commandes
+            'commandes'=> $commandes->get()
         ]);
     }
 

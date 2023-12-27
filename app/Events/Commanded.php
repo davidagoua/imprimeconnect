@@ -34,7 +34,6 @@ class Commanded
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('channel-name'),
             'App.User'
         ];
     }

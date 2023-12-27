@@ -8,6 +8,31 @@
     <div>
         <div class="card">
             <div class="card-body">
+                <div class="mb-2">
+                    <form action="" >
+                        <div  class="row mb-2 align-items-baseline">
+                            <div class="col-12 col-md-3 ">
+                                <label for="">N° Ticket</label>
+                                <input type="text" name="id" class="form-control">
+                            </div>
+                            <div class="col-12 col-md-3 ">
+                                <label for="">Nom du client</label>
+                                <input type="text" name="client_nom" class="form-control">
+                            </div>
+                            <div class="col-12 col-md-3 ">
+                                <label for="">Contact du client</label>
+                                <input type="text" name="contact" class="form-control">
+                            </div>
+
+                        </div>
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary">
+                                <span class="fa fa-search"></span>&nbsp;
+                                <span>Rechercher</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
                 <div class="d-flex justify-content-between">
                     <div></div>
 
@@ -29,7 +54,9 @@
                         <th>ACTIONS</th>
                     </tr>
                     @foreach($commandes as $commande)
-                        <tr class="@if($commande->deleted_at) text-danger @endif">
+                        <tr class="@if($commande->deleted_at) text-danger @endif
+                            @if($commande->avances()->sum('montant') == $commande->montant) text-dark font-weight-bold @endif
+                        ">
                             <td>#{{ $commande->pk }}</td>
                             <td>{{ Date::create($commande->created_at)->format('d/M/Y') }}</td>
                             <td>{{ $commande->client_nom }}</td>
